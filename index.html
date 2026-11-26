@@ -29,7 +29,7 @@
 
   <script>
     const SUPABASE_URL = 'https://jxswyigfwqjqgofdvxgn.supabase.co';
-    const SUPABASE_KEY = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imp4c3d5aWdmd3FqcWdvZmR2eGduIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTU3MTI0NzMsImV4cCI6MjExMTI4ODQ3M30.Lgguav5F0LfubrCGafi5W8WgR0pt1i3-fCAMYie-Zkg
+    const SUPABASE_KEY = 'PUNE_CHEIA_AICI';
     const BUCKET_NAME = 'DubShot';
 
     document.addEventListener('keydown', function(e) {
@@ -47,11 +47,12 @@
       const galleryEl = document.getElementById('gallery');
 
       try {
-        const response = await fetch(${SUPABASE_URL}/storage/v1/object/list/${BUCKET_NAME}, {
+        const endpoint = SUPABASE_URL + '/storage/v1/object/list/' + BUCKET_NAME;
+        const response = await fetch(endpoint, {
           method: 'POST',
           headers: {
             'apikey': SUPABASE_KEY,
-            'Authorization': Bearer ${SUPABASE_KEY},
+            'Authorization': 'Bearer ' + SUPABASE_KEY,
             'Content-Type': 'application/json'
           },
           body: JSON.stringify({
@@ -74,10 +75,10 @@
           return;
         }
 
-        statusEl.textContent = ${files.length} fotografii (Vizualizare protejată);
+        statusEl.textContent = files.length + ' fotografii (Vizualizare protejată)';
 
         files.forEach((file, index) => {
-          const url = ${SUPABASE_URL}/storage/v1/object/public/${BUCKET_NAME}/${encodeURIComponent(file.name)};
+          const url = SUPABASE_URL + '/storage/v1/object/public/' + BUCKET_NAME + '/' + encodeURIComponent(file.name);
           const ext = file.name.split('.').pop().toLowerCase();
 
           const card = document.createElement('div');
